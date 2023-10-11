@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
+
 public class TextParser {
     public static StringBuffer findWordsOfGivenLengthInQuestionSentences(String text, int length)
     {
@@ -6,6 +11,8 @@ public class TextParser {
         findQuestionSentences(textBuffer);
 
         findWordsOfGivenLength(textBuffer, length);
+
+        findUniqueWords(textBuffer);
 
         return textBuffer;
     }
@@ -48,5 +55,60 @@ public class TextParser {
                 }
             }
         }
+    }
+
+    private static void findUniqueWords(StringBuffer words)
+    {
+        ArrayList<StringBuffer> distinctWords = new ArrayList<>();
+
+        int start = 0;
+        for(int i = 0; i < words.length(); i++)
+        {
+            if(words.charAt(i) == ' ')
+            {
+                StringBuffer word = new StringBuffer(words.subSequence(start, i));
+                if(!containsInArray(distinctWords, word))
+                {
+                    distinctWords.add(word);
+                }
+
+                start = i + 1;
+            }
+        }
+
+        words.replace(0, words.length(), "");
+
+        for (StringBuffer w: distinctWords) {
+            words.append(w);
+            words.append(" ");
+        }
+    }
+
+    private static boolean containsInArray(ArrayList<StringBuffer> array, StringBuffer word)
+    {
+        for (StringBuffer w : array) {
+            if(isWordsEqual(w, word))
+                return true;
+        }
+
+        return false;
+    }
+
+    private static boolean isWordsEqual(StringBuffer word1, StringBuffer word2)
+    {
+        if(word1.length() != word2.length())
+        {
+            return false;
+        }
+
+        for(int i = 0; i < word1.length(); i++)
+        {
+            if(word1.charAt(i) != word2.charAt(i))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
