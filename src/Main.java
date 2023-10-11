@@ -6,7 +6,7 @@ public class Main {
     // C17 = 3 (В усіх питальних реченнях заданого тексту знайти та надрукувати без
     //повторень слова заданої довжини.)
     public static void main(String[] args) {
-        String text = "This is test line. Wait,   is it long  long enough  long? I guess yes!";
+        String text = "This is test line. Wait,    is it long  long enough  long? I guess yes!";
         int num = 4;
 
         System.out.println("Use predefined data?");
